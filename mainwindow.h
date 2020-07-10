@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include "inputdialog.h"
+#include "info.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,6 +22,8 @@ private slots:
     void DoubleClickFun(QTableWidgetItem* item);
 
     void on_pushButton_clicked();
+
+    void receviedData(Info *info);
 
 private:
     Ui::MainWindow *ui;

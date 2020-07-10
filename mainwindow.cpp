@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
             this,SLOT(DoubleClickFun(QTableWidgetItem*)));
 
     inputDialog = new InputDialog();
+    connect(inputDialog, SIGNAL(sendInfo(Info*)), this, SLOT(receviedData(Info*)));
+
     setWindowTitle("办事清单");
 }
 
@@ -41,4 +43,9 @@ void MainWindow::DoubleClickFun(QTableWidgetItem */*item*/)
 void MainWindow::on_pushButton_clicked()
 {
     inputDialog->exec();
+}
+
+void MainWindow::receviedData(Info *info)
+{
+    info->toString();
 }
