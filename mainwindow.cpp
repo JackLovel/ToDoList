@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableWidget->show();
 
     // http://cn.voidcc.com/question/p-csrholjn-qd.html
-    connect(ui->tableWidget, SIGNAL(cellClicked(int,int)), this, SLOT(testSlot(int,int)));
+    connect(ui->tableWidget, SIGNAL(cellClicked(int,int)), this, SLOT(displayTodo(int,int)));
 
     inputDialog = new InputDialog();
     connect(inputDialog, SIGNAL(sendInfo(Info*)), this, SLOT(receviedData(Info*)));
@@ -34,12 +34,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::DoubleClickFun(QTableWidgetItem */*item*/)
-{
-    qDebug() << "我被单击了";
-}
-
-void MainWindow::testSlot(int row, int col)
+void MainWindow::displayTodo(int row, int/* col*/)
 {
     QTableWidgetItem *itemId = new QTableWidgetItem;
     QTableWidgetItem *itemDescription = new QTableWidgetItem;
@@ -51,13 +46,11 @@ void MainWindow::testSlot(int row, int col)
     itemOperation = ui->tableWidget->item(row, 2);
     itemDate = ui->tableWidget->item(row, 3);
 
-    QString id = itemId->text();
-     QString str = QString("序号: %1\n描述：%2\n操作：%3\n时间：%4\n")
+    QString str = QString("序号: %1\n描述：%2\n操作：%3\n时间：%4\n")
              .arg(itemId->text())
              .arg(itemDescription->text())
              .arg(itemOperation->text())
              .arg(itemDate->text());
-//    qDebug() << item->text();
 
     ui->label->setText(str);
 }

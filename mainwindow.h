@@ -19,10 +19,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void DoubleClickFun(QTableWidgetItem* item);
-//    void cellDoubleClicked(int row, int column);
-
-    void testSlot(int row, int col);
+    void displayTodo(int row, int col);
 
     void on_pushButton_clicked();
 
