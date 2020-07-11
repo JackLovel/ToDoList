@@ -6,7 +6,7 @@ Info::Info()
 
 }
 
-Info::Info(int id, QString description, QString createDate, QString operation)
+Info::Info(QString id, QString description, QString createDate, QString operation)
 {
     this->id = id;
     this->description = description;

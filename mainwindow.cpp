@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    int row = 100;
+    int row = 0;
     int col = 4;
     ui->tableWidget->setColumnCount(col);
     ui->tableWidget->setRowCount(row);
@@ -47,5 +47,17 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::receviedData(Info *info)
 {
-    info->toString();
+//    info->toString();
+    QString id = info->id;
+    QString description = info->description;
+    QString date = info->createDate;
+    QString operation = info->operation;
+
+
+    int rowCount = ui->tableWidget->rowCount();
+    ui->tableWidget->insertRow(rowCount); // 增加一行
+    ui->tableWidget->setItem(rowCount, 0, new QTableWidgetItem(id));
+    ui->tableWidget->setItem(rowCount, 1, new QTableWidgetItem(description));
+    ui->tableWidget->setItem(rowCount, 2, new QTableWidgetItem(date));
+    ui->tableWidget->setItem(rowCount, 3, new QTableWidgetItem(operation));
 }

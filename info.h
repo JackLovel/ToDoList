@@ -9,10 +9,10 @@ class Info
 {
 public:
     Info();
-    Info(int id, QString description, QString createDate, QString operation);
+    Info(QString id, QString description, QString createDate, QString operation);
     void toString();
 
-    int id;
+    QString id;
     QString description;
     QString createDate;
     QString operation;
