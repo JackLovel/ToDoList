@@ -20,8 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers); //禁止编辑
     ui->tableWidget->show();
 
-    connect(ui->tableWidget,SIGNAL(itemDoubleClicked(QTableWidgetItem *)),
-            this,SLOT(DoubleClickFun(QTableWidgetItem*)));
+    // http://cn.voidcc.com/question/p-csrholjn-qd.html
+    connect(ui->tableWidget, SIGNAL(cellClicked(int,int)), this, SLOT(testSlot(int,int)));
 
     inputDialog = new InputDialog();
     connect(inputDialog, SIGNAL(sendInfo(Info*)), this, SLOT(receviedData(Info*)));
@@ -37,6 +37,29 @@ MainWindow::~MainWindow()
 void MainWindow::DoubleClickFun(QTableWidgetItem */*item*/)
 {
     qDebug() << "我被单击了";
+}
+
+void MainWindow::testSlot(int row, int col)
+{
+    QTableWidgetItem *itemId = new QTableWidgetItem;
+    QTableWidgetItem *itemDescription = new QTableWidgetItem;
+    QTableWidgetItem *itemOperation = new QTableWidgetItem;
+    QTableWidgetItem *itemDate = new QTableWidgetItem;
+
+    itemId = ui->tableWidget->item(row, 0);
+    itemDescription = ui->tableWidget->item(row, 1);
+    itemOperation = ui->tableWidget->item(row, 2);
+    itemDate = ui->tableWidget->item(row, 3);
+
+    QString id = itemId->text();
+     QString str = QString("序号: %1\n描述：%2\n操作：%3\n时间：%4\n")
+             .arg(itemId->text())
+             .arg(itemDescription->text())
+             .arg(itemOperation->text())
+             .arg(itemDate->text());
+//    qDebug() << item->text();
+
+    ui->label->setText(str);
 }
 
 
