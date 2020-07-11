@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -70,7 +70,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600; color:#000000;&quot;&gt;JackLovel&lt;/span&gt;&lt;/p&gt;&lt;p&gt;邮箱：gogkatsu@outlook.com&lt;/p&gt;&lt;p&gt;主页：&lt;a href=&quot;https://github.com/JackLovel/ToDoList&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#4c6b8a;&quot;&gt;https://github.com/JackLovel/ToDoList&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/JackLovel&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#4c6b8a;&quot;&gt;JackLovel&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;邮箱：&lt;a href=&quot;mailto:gogkatsu@outlook.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#4c6b8a;&quot;&gt;gogkatsu@outlook.com&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;主页：&lt;a href=&quot;https://github.com/JackLovel/ToDoList&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#4c6b8a;&quot;&gt;https://github.com/JackLovel/ToDoList&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </widget>
