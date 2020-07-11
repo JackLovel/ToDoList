@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
 
@@ -7,6 +8,17 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+//    QMenuBar *menuBar = new QMenuBar();
+//    QMenu *fileMenu = new QMenu("文件");
+//    QAction *exitAction = new QAction("退出");
+//    fileMenu->addAction(exitAction);
+
+//    QMenu *helpMenu = new QMenu("帮助");
+//    QAction *aboutAction = new QAction("退出");
+//    menuBar->addMenu(fileMenu);
+//    helpMenu->addAction(aboutAction);
+
     int row = 0;
     int col = 4;
     ui->tableWidget->setColumnCount(col);
@@ -25,7 +37,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     inputDialog = new InputDialog();
     connect(inputDialog, SIGNAL(sendInfo(Info*)), this, SLOT(receviedData(Info*)));
+    connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
 
+    aboutDialog = new AboutDialog(this);
+    connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::openAboutDialog);
     setWindowTitle("办事清单");
 }
 
@@ -33,7 +48,10 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+void MainWindow::openAboutDialog()
+{
+    aboutDialog->show();
+}
 void MainWindow::displayTodo(int row, int/* col*/)
 {
     QTableWidgetItem *itemId = new QTableWidgetItem;

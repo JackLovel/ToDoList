@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
+#include "aboutdialog.h"
 #include "inputdialog.h"
 #include "info.h"
 
@@ -24,10 +25,12 @@ private slots:
     void on_pushButton_clicked();
 
     void receviedData(Info *info);
+    void openAboutDialog();
 
 private:
     Ui::MainWindow *ui;
 
     InputDialog *inputDialog;
+    AboutDialog *aboutDialog;
 };
 #endif // MAINWINDOW_H
