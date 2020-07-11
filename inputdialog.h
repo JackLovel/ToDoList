@@ -16,6 +16,7 @@ public:
     explicit InputDialog(QWidget *parent = nullptr);
     ~InputDialog();
 
+    void initInfo();
 signals:
     void sendInfo(Info *info);
 

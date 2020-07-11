@@ -42,6 +42,7 @@ void MainWindow::DoubleClickFun(QTableWidgetItem */*item*/)
 
 void MainWindow::on_pushButton_clicked()
 {
+    inputDialog->initInfo();
     inputDialog->exec();
 }
 

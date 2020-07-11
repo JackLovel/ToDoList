@@ -19,12 +19,14 @@ SOURCES += \
     info.cpp \
     inputdialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    util.cpp
 
 HEADERS += \
     info.h \
     inputdialog.h \
-    mainwindow.h
+    mainwindow.h \
+    util.h
 
 FORMS += \
     inputdialog.ui \
