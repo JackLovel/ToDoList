@@ -99,3 +99,41 @@ void Connection::insertDb(Info *info)
 
     db.close();
 }
+
+
+// 修改数据
+void Connection::updateDb(Info *info)
+{
+    QSqlDatabase db;
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(databaseName);
+
+    if (db.open()) {
+        QSqlQuery query;
+        QString createSql = "create table if not exists infos (id varchar(100) primary key, \
+                description varchar(100),\
+                createDate varchar(100),\
+                operation varchar(100))";
+
+        query.prepare(createSql);
+        if (!query.exec()) {
+            qDebug() << "数据库已存在";
+        }
+
+        QString updateSql = QString("update infos set description = %1 createDate = %2 operation = %3 where id = %4;")
+                                .arg(info->description)
+                                .arg(info->createDate)
+                                .arg(info->operation)
+                                .arg(info->id);
+        query.prepare(updateSql);
+
+        if (!query.exec()) {
+            return;
+        } else {
+            qDebug() << "插入记录";
+        }
+    }
+
+
+    db.close();
+}

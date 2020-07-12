@@ -3,10 +3,13 @@
 
 #include <QMainWindow>
 #include <QTableWidget>
+
 #include "aboutdialog.h"
 #include "inputdialog.h"
 #include "info.h"
 #include "connection.h"
+#include "inputdialog.h"
+#include "editdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,10 +31,13 @@ private slots:
     void receviedData(Info *info);
     void openAboutDialog();
 
+    void on_buttonEdit_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     InputDialog *inputDialog;
     AboutDialog *aboutDialog;
+    EditDialog *editDialog;
 };
 #endif // MAINWINDOW_H

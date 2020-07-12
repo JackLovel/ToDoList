@@ -14,9 +14,10 @@ public:
 
     void connectDb();
     QString databaseName = "Info.db";
+
     void selectAll();
     void insertDb(Info *info);
-
+    void updateDb(Info *info);
 };
 
 #endif // CONNECTION_H

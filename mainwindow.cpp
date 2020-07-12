@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -8,16 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-//    QMenuBar *menuBar = new QMenuBar();
-//    QMenu *fileMenu = new QMenu("文件");
-//    QAction *exitAction = new QAction("退出");
-//    fileMenu->addAction(exitAction);
-
-//    QMenu *helpMenu = new QMenu("帮助");
-//    QAction *aboutAction = new QAction("退出");
-//    menuBar->addMenu(fileMenu);
-//    helpMenu->addAction(aboutAction);
 
     int row = 0;
     int col = 4;
@@ -35,12 +26,17 @@ MainWindow::MainWindow(QWidget *parent)
     // http://cn.voidcc.com/question/p-csrholjn-qd.html
     connect(ui->tableWidget, SIGNAL(cellClicked(int,int)), this, SLOT(displayTodo(int,int)));
 
+    // 新增数据
     inputDialog = new InputDialog();
     connect(inputDialog, SIGNAL(sendInfo(Info*)), this, SLOT(receviedData(Info*)));
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::close);
 
     aboutDialog = new AboutDialog(this);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::openAboutDialog);
+
+    // 修改数据
+    editDialog = new EditDialog(this);
+//    connect(inputDialog, SIGNAL(sendInfo(Info*)), this, SLOT(receviedData(Info*)));
 
     setWindowTitle("办事清单");
 }
@@ -100,4 +96,10 @@ void MainWindow::receviedData(Info *info)
     ui->tableWidget->setItem(rowCount, 1, new QTableWidgetItem(description));
     ui->tableWidget->setItem(rowCount, 2, new QTableWidgetItem(date));
     ui->tableWidget->setItem(rowCount, 3, new QTableWidgetItem(operation));
+}
+
+void MainWindow::on_buttonEdit_clicked()
+{
+    editDialog->initInfo();
+    editDialog->exec();
 }

@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     aboutdialog.cpp \
     connection.cpp \
+    editdialog.cpp \
     info.cpp \
     inputdialog.cpp \
     main.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
 HEADERS += \
     aboutdialog.h \
     connection.h \
+    editdialog.h \
     info.h \
     inputdialog.h \
     mainwindow.h \
@@ -35,6 +37,7 @@ HEADERS += \
 
 FORMS += \
     aboutdialog.ui \
+    editdialog.ui \
     inputdialog.ui \
     mainwindow.ui
 
