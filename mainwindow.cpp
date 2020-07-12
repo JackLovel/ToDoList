@@ -3,12 +3,16 @@
 #include "ui_mainwindow.h"
 
 #include <QDebug>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    selectRow = -1; // 默认的没有选择
+    conn = new Connection();
 
     int row = 0;
     int col = 4;
@@ -36,7 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 修改数据
     editDialog = new EditDialog(this);
-//    connect(inputDialog, SIGNAL(sendInfo(Info*)), this, SLOT(receviedData(Info*)));
+    connect(conn, SIGNAL(sendAllData(QVector<Info*>)), this, SLOT(receviedAllData(QVector<Info*>)));
+
 
     setWindowTitle("办事清单");
 }
@@ -51,6 +56,9 @@ void MainWindow::openAboutDialog()
 }
 void MainWindow::displayTodo(int row, int/* col*/)
 {
+    selectRow = row;
+    qDebug() << "=>" << selectRow;
+
     QTableWidgetItem *itemId = new QTableWidgetItem;
     QTableWidgetItem *itemDescription = new QTableWidgetItem;
     QTableWidgetItem *itemOperation = new QTableWidgetItem;
@@ -100,6 +108,23 @@ void MainWindow::receviedData(Info *info)
 
 void MainWindow::on_buttonEdit_clicked()
 {
+    // 如果，用户没有 选择中的任何数据，那么就不触发 更新对话框
+    if (selectRow == -1) {
+        QMessageBox::warning(this, "警告", "你没有选中数据");
+        return;
+    }
+
     editDialog->initInfo();
     editDialog->exec();
+}
+
+void MainWindow::on_buttonLoadData_clicked()
+{
+    conn->loadData();
+}
+
+//
+void MainWindow::receviedAllData(QVector<Info *> infos)
+{
+   qDebug() << infos;
 }

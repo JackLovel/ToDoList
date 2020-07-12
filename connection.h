@@ -5,7 +5,7 @@
 #include <QSqlDatabase>
 #include "info.h"
 
-class Connection : QObject
+class Connection : public QObject
 {
     Q_OBJECT
 public:
@@ -14,10 +14,14 @@ public:
 
     void connectDb();
     QString databaseName = "Info.db";
+    QVector<Info*> infos;
 
-    void selectAll();
+    void loadData();
     void insertDb(Info *info);
     void updateDb(Info *info);
+
+signals:
+    void sendAllData(QVector<Info*> infos);
 };
 
 #endif // CONNECTION_H

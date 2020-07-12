@@ -29,9 +29,13 @@ private slots:
     void on_pushButton_clicked();
 
     void receviedData(Info *info);
+    void receviedAllData(QVector<Info*> infos);
+
     void openAboutDialog();
 
     void on_buttonEdit_clicked();
+
+    void on_buttonLoadData_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -39,5 +43,9 @@ private:
     InputDialog *inputDialog;
     AboutDialog *aboutDialog;
     EditDialog *editDialog;
+
+    Connection *conn;
+
+    int selectRow;
 };
 #endif // MAINWINDOW_H
