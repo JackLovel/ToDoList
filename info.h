@@ -12,10 +12,10 @@ public:
     Info(QString id, QString description, QString createDate, QString operation);
     void toString();
 
-    QString id;
-    QString description;
-    QString createDate;
-    QString operation;
+    QString id; // 序号
+    QString description; // 介绍
+    QString createDate; // 创建时间
+    QString operation; // 操作
 };
 
 #endif // INFO_H

@@ -41,6 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     aboutDialog = new AboutDialog(this);
     connect(ui->actionAbout, &QAction::triggered, this, &MainWindow::openAboutDialog);
+
     setWindowTitle("办事清单");
 }
 
@@ -82,7 +83,11 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::receviedData(Info *info)
 {
-//    info->toString();
+    // 插入数据
+    Connection *conn = new Connection();
+    conn->insertDb(info);
+
+    info->toString();
     QString id = info->id;
     QString description = info->description;
     QString date = info->createDate;

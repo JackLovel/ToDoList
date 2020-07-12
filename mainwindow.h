@@ -6,6 +6,7 @@
 #include "aboutdialog.h"
 #include "inputdialog.h"
 #include "info.h"
+#include "connection.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

@@ -1,4 +1,5 @@
-QT       += core gui
+QT       += core gui sql
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     aboutdialog.cpp \
+    connection.cpp \
     info.cpp \
     inputdialog.cpp \
     main.cpp \
@@ -25,6 +27,7 @@ SOURCES += \
 
 HEADERS += \
     aboutdialog.h \
+    connection.h \
     info.h \
     inputdialog.h \
     mainwindow.h \
