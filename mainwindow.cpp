@@ -78,25 +78,11 @@ void MainWindow::on_pushButton_clicked()
     inputDialog->exec();
 }
 
+// 插入数据
 void MainWindow::receviedData(Info *info)
 {
-    // 插入数据
-//    Connection *conn = new Connection();
-//    conn->insertDb(info);
-
-//    info->toString();
-//    QString id = info->id;
-//    QString description = info->description;
-//    QString date = info->createDate;
-//    QString operation = info->operation;
-
-
-//    int rowCount = ui->tableView->rowCount();
-//    ui->tableView->insertRow(rowCount); // 增加一行
-//    ui->tableView->setItem(rowCount, 0, new QtableViewItem(id));
-//    ui->tableView->setItem(rowCount, 1, new QtableViewItem(description));
-//    ui->tableView->setItem(rowCount, 2, new QtableViewItem(date));
-//    ui->tableView->setItem(rowCount, 3, new QtableViewItem(operation));
+    conn->insertDb(info);
+    conn->loadData();
 }
 
 void MainWindow::on_buttonEdit_clicked()
@@ -126,19 +112,18 @@ void MainWindow::receviedAllData(QVector<Info *> infos)
 // 显示数据表
 void MainWindow::displayTable(QVector<Info *> infoVector)
 {
-    qDebug() << infoVector.size();
-
-
     if (infoVector.isEmpty()) {
         return;
     }
 
+    int row = 0;
     for (int i = 0; i < infoVector.size(); i++) {
+        row = i;
         Info *info = infoVector.at(i);
 
-        model->setItem(i, 0, new QStandardItem(info->id));
-        model->setItem(i, 1, new QStandardItem(info->description));
-        model->setItem(i, 2, new QStandardItem(info->createDate));
-        model->setItem(i, 3, new QStandardItem(info->operation));
+        model->setItem(row, 0, new QStandardItem(info->id));
+        model->setItem(row, 1, new QStandardItem(info->description));
+        model->setItem(row, 2, new QStandardItem(info->createDate));
+        model->setItem(row, 3, new QStandardItem(info->operation));
      }
 }
