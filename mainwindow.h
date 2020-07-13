@@ -27,8 +27,9 @@ public:
     ~MainWindow();
 
     void displayTable(QVector<Info *> infoVector);
+    void flushData(); // 刷新数据
 private slots:
-    void displayTodo(int row, int col);
+    void displayInfo(const QModelIndex &index);
 
     void on_pushButton_clicked();
 
@@ -53,5 +54,6 @@ private:
     Connection *conn;
 
     int selectRow;
+    int tableCol;
 };
 #endif // MAINWINDOW_H

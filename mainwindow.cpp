@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     selectRow = -1; // 默认的没有选择
+    tableCol = 4;
     conn = new Connection();
 
     QStringList header;
@@ -21,7 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableView->setModel(model);
 
     // http://cn.voidcc.com/question/p-csrholjn-qd.html
-    connect(ui->tableView, SIGNAL(cellClicked(int,int)), this, SLOT(displayTodo(int,int)));
+    connect(ui->tableView, SIGNAL(clicked(const QModelIndex &)), this, SLOT(displayInfo(const QModelIndex &)));
+//    connect(ui->tableView, SIGNAL(doubleClicked(int,int)), this, SLOT(displayTodo(int,int)));
 
     // 新增数据
     inputDialog = new InputDialog();
@@ -36,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(conn, SIGNAL(sendAllData(QVector<Info*>)), this, SLOT(receviedAllData(QVector<Info*>)));
 
 
+    // 加载数据
+    flushData();
+
     setWindowTitle("办事清单");
 }
 
@@ -47,28 +52,22 @@ void MainWindow::openAboutDialog()
 {
     aboutDialog->show();
 }
-void MainWindow::displayTodo(int row, int/* col*/)
+void MainWindow::displayInfo(const QModelIndex & index)
 {
-//    selectRow = row;
-//    qDebug() << "=>" << selectRow;
+    selectRow = index.row();
 
-//    QtableViewItem *itemId = new QtableViewItem;
-//    QtableViewItem *itemDescription = new QtableViewItem;
-//    QtableViewItem *itemOperation = new QtableViewItem;
-//    QtableViewItem *itemDate = new QtableViewItem;
+    QString id = model->index(selectRow, 0).data().toString();
+    QString description = model->index(selectRow, 1).data().toString();
+    QString date = model->index(selectRow, 2).data().toString();
+    QString operation = model->index(selectRow, 3).data().toString();
 
-//    itemId = ui->tableView->item(row, 0);
-//    itemDescription = ui->tableView->item(row, 1);
-//    itemOperation = ui->tableView->item(row, 2);
-//    itemDate = ui->tableView->item(row, 3);
+    QString str = QString("序号: %1\n事情：%2\n操作：%3\n日期：%4\n")
+             .arg(id)
+             .arg(description)
+             .arg(operation)
+             .arg(date);
 
-//    QString str = QString("序号: %1\n描述：%2\n操作：%3\n时间：%4\n")
-//             .arg(itemId->text())
-//             .arg(itemDescription->text())
-//             .arg(itemOperation->text())
-//             .arg(itemDate->text());
-
-//    ui->label->setText(str);
+    ui->label->setText(str);
 }
 
 
@@ -78,11 +77,15 @@ void MainWindow::on_pushButton_clicked()
     inputDialog->exec();
 }
 
+void MainWindow::flushData()
+{
+    conn->loadData();
+}
 // 插入数据
 void MainWindow::receviedData(Info *info)
 {
     conn->insertDb(info);
-    conn->loadData();
+    flushData();
 }
 
 void MainWindow::on_buttonEdit_clicked()
@@ -100,7 +103,7 @@ void MainWindow::on_buttonEdit_clicked()
 // 发出调用数据请求
 void MainWindow::on_buttonLoadData_clicked()
 {
-    conn->loadData();
+    flushData();
 }
 
 // 接收所有数据
