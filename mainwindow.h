@@ -2,7 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QStandardItemModel>
 #include <QTableWidget>
+#include <QDebug>
+#include <QMessageBox>
 
 #include "aboutdialog.h"
 #include "inputdialog.h"
@@ -23,6 +26,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void displayTable(QVector<Info *> infoVector);
 private slots:
     void displayTodo(int row, int col);
 
@@ -43,6 +47,8 @@ private:
     InputDialog *inputDialog;
     AboutDialog *aboutDialog;
     EditDialog *editDialog;
+
+    QStandardItemModel *model;
 
     Connection *conn;
 

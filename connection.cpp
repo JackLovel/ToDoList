@@ -58,7 +58,7 @@ void Connection::loadData()
             operation varchar(100))";
 
     if(query->exec(initSql)) {
-        qDebug() << "Create testResult Successful";
+        qDebug() << "数据库创建成功";
     }
 
     QString selectAllSql = "select * from infos";
@@ -67,17 +67,20 @@ void Connection::loadData()
     if (!query->exec()) {
         return; // error
     } else {
+        infos.clear(); // 清空之前的数据
+
         while(query->next()) {
             Info *info = new Info();
             info->id = query->value(0).toString();
             info->description = query->value(1).toString();
-            info->createDate = query->value(2).toInt();
-            info->operation = query->value(3).toInt();
+            info->createDate = query->value(2).toString();
+            info->operation = query->value(3).toString();
 
             infos.push_back(info);
         }
      }
 
+//    qDebug() << infos;
     emit sendAllData(infos);
 }
 
