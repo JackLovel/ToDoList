@@ -7,6 +7,8 @@ EditDialog::EditDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // edit 窗体接收 主窗体的信号
+    connect(parent, SIGNAL(sendInfoEdit(Info *)), this, SLOT(getInfoEdit(Info *)));
     setWindowTitle("修改信息");
 }
 
@@ -39,4 +41,19 @@ void EditDialog::on_buttonReset_clicked()
 {
     // 清空所有已经填写 数据
     this->initInfo();
+}
+
+void EditDialog::getInfoEdit(Info *info)
+{
+    this->initInfo();
+
+    QString id = info->id;
+    QString description = info->description;
+    QString createDate = info->createDate;
+    QString operation = info->operation;
+
+    ui->lineEditId->setText(info->id);
+    ui->lineEditDo->setText(operation);
+    ui->lineEditDate->setText(info->createDate);
+    ui->lineEditThing->setText(description);
 }

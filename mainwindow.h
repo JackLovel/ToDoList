@@ -42,6 +42,9 @@ private slots:
 
     void on_buttonLoadData_clicked();
 
+signals:
+    void sendInfoEdit(Info *info);
+
 private:
     Ui::MainWindow *ui;
 

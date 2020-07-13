@@ -58,16 +58,22 @@ void MainWindow::displayInfo(const QModelIndex & index)
 
     QString id = model->index(selectRow, 0).data().toString();
     QString description = model->index(selectRow, 1).data().toString();
-    QString date = model->index(selectRow, 2).data().toString();
+    QString createDate = model->index(selectRow, 2).data().toString();
     QString operation = model->index(selectRow, 3).data().toString();
 
     QString str = QString("序号: %1\n事情：%2\n操作：%3\n日期：%4\n")
              .arg(id)
              .arg(description)
              .arg(operation)
-             .arg(date);
+             .arg(createDate);
 
     ui->label->setText(str);
+
+//    Info *info = new Info();
+//    info->id = id;
+//    info->description = description;
+//    info->createDate = createDate;
+//    info->operation = operation;
 }
 
 
@@ -96,7 +102,20 @@ void MainWindow::on_buttonEdit_clicked()
         return;
     }
 
-    editDialog->initInfo();
+    QString id = model->index(selectRow, 0).data().toString();
+    QString description = model->index(selectRow, 1).data().toString();
+    QString createDate = model->index(selectRow, 2).data().toString();
+    QString operation = model->index(selectRow, 3).data().toString();
+
+    Info *info = new Info();
+    info->id = id;
+    info->description = description;
+    info->createDate = createDate;
+    info->operation = operation;
+
+    emit sendInfoEdit(info);
+
+//    editDialog->initInfo();
     editDialog->exec();
 }
 
